@@ -1,9 +1,9 @@
 ﻿using System.Numerics;
 using System.Windows;
 using System;
-using System.IO;
 using WpfApp_Dialogs;
 using WpfApp_ModInv;
+using Encryptor_RSA;
 
 namespace WpfApp_Encrypt
 	{
@@ -25,9 +25,17 @@ namespace WpfApp_Encrypt
 					textBox_selectFile.Text = _dialogService.FilePath;
 				}
 			}
+        private void AddLog(string message)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                textBox_Output.Text += message;
+            });
+        }
 
-		private void button_EncryptFile_Click(object sender, RoutedEventArgs e)
+        private void button_EncryptFile_Click(object sender, RoutedEventArgs e)
 			{
+				textBox_Output.Clear();	
 				//параметры для шифрования(p,q,e)
 				String p_s = textBox_p_val.Text;
 				String q_s = textBox_q_val.Text;
@@ -52,7 +60,7 @@ namespace WpfApp_Encrypt
 
 				
 
-			String file_name = textBox_selectFile.Text;
+				String file_name = textBox_selectFile.Text;
 				if(string.IsNullOrEmpty(textBox_selectFile.Text))
 				{
 					MessageBox.Show("Файл для шифрования не выбран!", "Предупреждение", MessageBoxButton.OK);
@@ -71,25 +79,12 @@ namespace WpfApp_Encrypt
 					textBox_Output.Text += $"Публичный ключ: ({e_s},{n.ToString()})\n";
 					textBox_Output.Text += $"Закрытый ключ: ({d.ToString()},{n.ToString()})\n";
 				}
-				//шифрование
-				byte[] data = File.ReadAllBytes(file_name);
-				textBox_Output.Text += ($"\nЗагружено {data.Length} байт.\n");
-				BigInteger[] encrypted = new BigInteger[data.Length];
 
-				for (int i = 0; i < data.Length; i++)
-					encrypted[i] = BigInteger.ModPow(data[i], e_Bigint, n);
+			//шифрование
+				File_Cryptor cryptor = new File_Cryptor(n, d, e_Bigint, AddLog);
+				cryptor.CryptFile(file_name);
 
-				using (BinaryWriter bw = new BinaryWriter(File.Open(String.Concat(file_name, ".enc"), FileMode.Create)))
-				{
-				foreach (var value in encrypted)
-					{
-						byte[] bytes = value.ToByteArray();
-						bw.Write(bytes.Length);
-						bw.Write(bytes);
-					}
-				}
-				textBox_Output.Text += ($"\nФайл {file_name}  успешно зашифрован.");
-				textBox_Output.Text += "Находится в папке с исходным файлом.";
+				
 		}
 
 	}
