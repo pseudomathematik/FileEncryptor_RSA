@@ -59,8 +59,8 @@ namespace WpfApp_Encrypt
 					"Ошибка ввода",
 					 MessageBoxButton.OK);
 					return;
-
 				}
+
 				BigInteger p = BigInteger.Parse(p_s);
 				BigInteger q = BigInteger.Parse(q_s);
 				BigInteger e_Bigint = BigInteger.Parse(e_s);

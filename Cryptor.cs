@@ -21,7 +21,6 @@ namespace Encryptor_RSA
             this.e_Bigint = e_Bigint;
             this.log = log;
         }
-
         public void CryptFile(string file_name)
         {
             byte[] data = File.ReadAllBytes(file_name);
