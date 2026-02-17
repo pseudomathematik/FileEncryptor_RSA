@@ -28,36 +28,41 @@ namespace Encryptor_RSA
 
             byte[] nBytes = n.ToByteArray();
             
+            //длина  n в байтах.если последний байт 0,он отбрасывается
             int keySizeInBytes = nBytes[nBytes.Length - 1] == 0 ? nBytes.Length - 1 : nBytes.Length;
-
+            //размер блока данных
             int blockSize = keySizeInBytes - 1; // -1 для padding 
             List<BigInteger> encryptedBlocks = new List<BigInteger>();
 
             for (int offset = 0; offset < data.Length; offset += blockSize)
             {
-                int currentBlockSize = Math.Min(blockSize, data.Length - offset);
+                int currentBlockSize = Math.Min(blockSize, data.Length - offset);//размер реальных данных в блоке
                 byte[] block = new byte[blockSize]; 
 
                 // padding: заполняем блок нулями, потом копируем данные в конец блока
                 Array.Copy(data, offset, block, blockSize - currentBlockSize, currentBlockSize);
-
-                
+                //перевод в Little-endian(кодировка)
                 byte[] blockBE = new byte[block.Length];
                 Array.Copy(block, blockBE, block.Length);
                 Array.Reverse(blockBE); 
+                //добавляем нулевой байт для положит.числа
                 byte[] blockWithSign = new byte[blockBE.Length + 1];
                 Array.Copy(blockBE, 0, blockWithSign, 0, blockBE.Length);
-
+                //блок в число BigInteger
                 BigInteger m = new BigInteger(blockWithSign);
-
+                //RSA шифрование блока
                 BigInteger c = BigInteger.ModPow(m, e_Bigint, n);
+                // добавление его к остальным
                 encryptedBlocks.Add(c);
             }
 
             using (BinaryWriter bw = new BinaryWriter(File.Open(file_name + ".enc", FileMode.Create)))
             {
+                //кол-во блоков
                 bw.Write(encryptedBlocks.Count);
+                //исходный размер файла
                 bw.Write(data.Length);
+                //поблочная запись  зашифрованных данных в файл
                 foreach (var block in encryptedBlocks)
                 {
                     byte[] bytes = block.ToByteArray();

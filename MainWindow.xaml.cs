@@ -4,6 +4,7 @@ using System;
 using WpfApp_Dialogs;
 using WpfApp_ModInv;
 using Encryptor_RSA;
+using Encrypt_Info;
 
 namespace WpfApp_Encrypt
 	{
@@ -32,11 +33,17 @@ namespace WpfApp_Encrypt
                 textBox_Output.Text += message;
             });
         }
+		private void button_Info_Click(object sender, RoutedEventArgs e)
+		{
+			Info.ShowInfo();
+			return;
+		}
 
         private void button_EncryptFile_Click(object sender, RoutedEventArgs e)
-			{
+		{
 				textBox_Output.Clear();	
 				//параметры для шифрования(p,q,e)
+				
 				String p_s = textBox_p_val.Text;
 				String q_s = textBox_q_val.Text;
 				String e_s = textBox_e_val.Text;
@@ -45,10 +52,18 @@ namespace WpfApp_Encrypt
 					MessageBox.Show("Введены не все параметры шифрования RSA!", "Предупреждение", MessageBoxButton.OK);
 					return;
 				}
+				if (!ulong.TryParse(p_s, out ulong p_ul) || !ulong.TryParse(q_s, out ulong q_ul) || !ulong.TryParse(e_s, out ulong e_ul))
+				{
+					MessageBox.Show(
+					 "Параметры RSA должны быть целыми положительными числами!",
+					"Ошибка ввода",
+					 MessageBoxButton.OK);
+					return;
+
+				}
 				BigInteger p = BigInteger.Parse(p_s);
 				BigInteger q = BigInteger.Parse(q_s);
 				BigInteger e_Bigint = BigInteger.Parse(e_s);
-
 
 				BigInteger n = p * q;
 				BigInteger phi = (p - 1) * (q - 1);

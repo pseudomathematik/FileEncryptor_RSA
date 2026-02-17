@@ -7,32 +7,33 @@
         mc:Ignorable="d"
         Title="Шифрование RSA" Height="390" Width="800" ResizeMode="NoResize">
 
-	<Grid Margin="0,0,0,2">
-		<Canvas>
-			<Label x:Name="Label_pqe" Content="Введите параметры p,q,e для шифрования RSA" Canvas.Left="10" Canvas.Top="10" Height="25" Width="252" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="11"/>
-			<Label Content="p = " Canvas.Left="11" Canvas.Top="37" Height="33" Width="24" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.353,0.841"/>
-			<TextBox x:Name="textBox_p_val" Canvas.Left="37" TextWrapping="Wrap" Canvas.Top="43" Width="81" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="11"/>
-			<TextBox x:Name="textBox_q_val" Canvas.Left="37" TextWrapping="Wrap" Canvas.Top="71" Width="81" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.695,4.175"/>
-			<Label x:Name="label_e" Content="e = " Canvas.Left="8" Canvas.Top="95" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="26" RenderTransformOrigin="0.619,0.124"/>
-			<TextBox x:Name="textBox_e_val" Canvas.Left="37" TextWrapping="Wrap" Canvas.Top="101" Width="81" FontSize="11" RenderTransformOrigin="0.695,4.175" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-			<Label x:Name="Label_comp_param" Content="Вычисленные параметры:" Canvas.Left="10" Canvas.Top="123" RenderTransformOrigin="-0.226,0.233" HorizontalAlignment="Left" VerticalAlignment="Top" Width="153" FontSize="11"/>
-			<Label x:Name="label_n" Content="n = " Canvas.Left="10" Canvas.Top="145" RenderTransformOrigin="0.297,0.299" FontSize="11"/>
-			<TextBox x:Name="textBox_n_val" Canvas.Left="34" TextWrapping="Wrap" Canvas.Top="150" Width="81" FontSize="11" RenderTransformOrigin="0.695,4.175" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False"/>
-			<Label x:Name="label_phi" Content="φ = " Canvas.Left="9" Canvas.Top="167" RenderTransformOrigin="0.019,0.315" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-			<TextBox x:Name="textBox_phi_val" Canvas.Left="34" TextWrapping="Wrap" Canvas.Top="173" Width="81" FontSize="11" RenderTransformOrigin="0.695,4.175" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-			<Label x:Name="label_d" Content="d = " Canvas.Left="10" Canvas.Top="192" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="11"/>
-			<TextBox x:Name="textBox_d_val" Canvas.Left="34" TextWrapping="Wrap" Canvas.Top="198" Width="81" FontSize="11" RenderTransformOrigin="0.695,4.175" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-			<Button x:Name="button_SelectFile" Content="Выбрать файл для шифрования" Canvas.Left="3" Canvas.Top="225" RenderTransformOrigin="-0.254,0.591" HorizontalAlignment="Left" VerticalAlignment="Center" Width="168" Height="23" FontSize="11" Click="button_SelectFile_Click">
-				<Button.BindingGroup>
-					<BindingGroup/>
-				</Button.BindingGroup>
-			</Button>
-			<TextBox x:Name="textBox_selectFile" Canvas.Left="3" TextWrapping="Wrap" Canvas.Top="253" Width="252" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Center" Height="46" IsEnabled="False" FontFamily="Arial"/>
-			<Button x:Name="button_EncryptFile" Content="Зашифровать выбранный файл" Canvas.Left="3" Canvas.Top="304" Height="38" Width="168" HorizontalAlignment="Left" VerticalAlignment="Center" Click="button_EncryptFile_Click" FontSize="11"/>
-			<Label Content="Процес работы программы: " Canvas.Left="262" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Center" Width="163" FontSize="11"/>
-			<TextBox x:Name="textBox_Output" Canvas.Left="262" TextWrapping="Wrap" Canvas.Top="35" Width="515" Height="307" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="11" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" FontFamily="Arial"/>
-		</Canvas>
-		<Label x:Name="label_q" Content="q = " HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Height="27" Width="25" FontSize="11" RenderTransformOrigin="0.034,0.46"/>
+    <Grid Margin="0,0,0,2">
+        <Canvas>
+            <Label x:Name="Label_pqe" Content="Введите параметры p,q,e для шифрования RSA" Canvas.Left="10" Canvas.Top="10" Height="25" Width="252" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="11"/>
+            <Label Content="p = " Canvas.Left="11" Canvas.Top="37" Height="33" Width="24" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.353,0.841"/>
+            <TextBox x:Name="textBox_p_val" Canvas.Left="37" TextWrapping="Wrap" Canvas.Top="43" Width="81" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="11"/>
+            <TextBox x:Name="textBox_q_val" Canvas.Left="37" TextWrapping="Wrap" Canvas.Top="71" Width="81" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.695,4.175"/>
+            <Label x:Name="label_e" Content="e = " Canvas.Left="8" Canvas.Top="95" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="26" RenderTransformOrigin="0.619,0.124"/>
+            <TextBox x:Name="textBox_e_val" Canvas.Left="37" TextWrapping="Wrap" Canvas.Top="101" Width="81" FontSize="11" RenderTransformOrigin="0.695,4.175" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label x:Name="Label_comp_param" Content="Вычисленные параметры:" Canvas.Left="10" Canvas.Top="123" RenderTransformOrigin="-0.226,0.233" HorizontalAlignment="Left" VerticalAlignment="Top" Width="153" FontSize="11"/>
+            <Label x:Name="label_n" Content="n = " Canvas.Left="10" Canvas.Top="145" RenderTransformOrigin="0.297,0.299" FontSize="11"/>
+            <TextBox x:Name="textBox_n_val" Canvas.Left="34" TextWrapping="Wrap" Canvas.Top="150" Width="81" FontSize="11" RenderTransformOrigin="0.695,4.175" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False"/>
+            <Label x:Name="label_phi" Content="φ = " Canvas.Left="9" Canvas.Top="167" RenderTransformOrigin="0.019,0.315" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox x:Name="textBox_phi_val" Canvas.Left="34" TextWrapping="Wrap" Canvas.Top="173" Width="81" FontSize="11" RenderTransformOrigin="0.695,4.175" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label x:Name="label_d" Content="d = " Canvas.Left="10" Canvas.Top="192" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="11"/>
+            <TextBox x:Name="textBox_d_val" Canvas.Left="34" TextWrapping="Wrap" Canvas.Top="198" Width="81" FontSize="11" RenderTransformOrigin="0.695,4.175" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Button x:Name="button_SelectFile" Content="Выбрать файл для шифрования" Canvas.Left="3" Canvas.Top="225" RenderTransformOrigin="-0.254,0.591" HorizontalAlignment="Left" VerticalAlignment="Center" Width="168" Height="23" FontSize="11" Click="button_SelectFile_Click">
+                <Button.BindingGroup>
+                    <BindingGroup/>
+                </Button.BindingGroup>
+            </Button>
+            <TextBox x:Name="textBox_selectFile" Canvas.Left="3" TextWrapping="Wrap" Canvas.Top="253" Width="252" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Center" Height="46" IsEnabled="False" FontFamily="Arial"/>
+            <Button x:Name="button_EncryptFile" Content="Зашифровать выбранный файл" Canvas.Left="3" Canvas.Top="304" Height="38" Width="168" HorizontalAlignment="Left" VerticalAlignment="Center" Click="button_EncryptFile_Click" FontSize="11"/>
+            <Label Content="Процес работы программы: " Canvas.Left="262" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Center" Width="163" FontSize="11"/>
+            <TextBox x:Name="textBox_Output" Canvas.Left="262" TextWrapping="Wrap" Canvas.Top="35" Width="515" Height="307" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="11" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" FontFamily="Arial"/>
+            <Button x:Name="button_Info" Content="Справка" Canvas.Left="136" Canvas.Top="43" Height="34" Width="119" HorizontalAlignment="Center" VerticalAlignment="Top" Click="button_Info_Click"/>
+        </Canvas>
+        <Label x:Name="label_q" Content="q = " HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Height="27" Width="25" FontSize="11" RenderTransformOrigin="0.034,0.46"/>
 
-	</Grid>
+    </Grid>
 </Window>
