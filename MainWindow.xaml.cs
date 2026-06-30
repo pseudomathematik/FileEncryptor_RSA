@@ -1,11 +1,11 @@
-﻿using System.Numerics;
-using System.Windows;
+﻿using Encrypt_Info;
+using Encryptor_RSA;
+using IsPrime_Checker;
 using System;
+using System.Numerics;
+using System.Windows;
 using WpfApp_Dialogs;
 using WpfApp_ModInv;
-using Encryptor_RSA;
-using Encrypt_Info;
-
 namespace WpfApp_Encrypt
 	{
 	/// <summary>
@@ -52,7 +52,7 @@ namespace WpfApp_Encrypt
 					MessageBox.Show("Введены не все параметры шифрования RSA!", "Предупреждение", MessageBoxButton.OK);
 					return;
 				}
-				if (!ulong.TryParse(p_s, out ulong p_ul) || !ulong.TryParse(q_s, out ulong q_ul) || !ulong.TryParse(e_s, out ulong e_ul))
+				if (!BigInteger.TryParse(p_s, out BigInteger p_ul) || !BigInteger.TryParse(q_s, out BigInteger q_ul) || !BigInteger.TryParse(e_s, out BigInteger e_ul))
 				{
 					MessageBox.Show(
 					 "Параметры RSA должны быть целыми положительными числами!",
@@ -64,8 +64,34 @@ namespace WpfApp_Encrypt
 				BigInteger p = BigInteger.Parse(p_s);
 				BigInteger q = BigInteger.Parse(q_s);
 				BigInteger e_Bigint = BigInteger.Parse(e_s);
-
-				BigInteger n = p * q;
+            if (p == q)
+            {
+                MessageBox.Show(
+                    "Числа p и q не должны совпадать.",
+                    "Ошибка RSA",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+                return;
+            }
+            if (!Prime_Checker.IsPrime(p))
+            {
+                MessageBox.Show(
+                    "Число p не является простым.При шифровании и расшифровке файл может быть поврежден!",
+                    "Ошибка RSA",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+                return;
+            }
+            if (!Prime_Checker.IsPrime(q))
+            {
+                MessageBox.Show(
+                    "Число q не является простым.При шифровании и расшифровке файл может быть поврежден!",
+                    "Ошибка RSA",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+                return;
+            }
+            BigInteger n = p * q;
 				BigInteger phi = (p - 1) * (q - 1);
 				BigInteger d = ModInverse.ModInverse_Proc(e_Bigint, phi);
 				
